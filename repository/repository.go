@@ -1,47 +1,47 @@
 package repository
 
 type Repository interface {
-    List    func(dest interface{}, query string, args ...interface{}) error
-    Get     func(ID string, dest interface{}, query string, args ...interface{}) error
-    Create  func(data interface{}, query string, args ...interface{}) error
-    Update  func(ID string, data interface{}, query string, args ...interface{}) error
-    Delete  func(ID string, query string, args ...interface{}) error
+    List    func(dest interface{}, query string) error
+    Get     func(ID string, dest interface{}, query string) error
+    Create  func(data interface{}, query string) error
+    Update  func(ID string, data interface{}, query string) error
+    Delete  func(ID string, query string) error
 }
 
-func List(dest interface{}, query string, args ...interface{}) error {
-    err := db.Select(dest, query, args)
+func List(dest interface{}, query string) error {
+    err := dbList(dest, query)
     if err != nil {
         return err
     }
     return nil
 }
 
-func Get(ID string, dest interface{}, query string, args ...interface{}) error {
-    err := db.Select(ID, dest, query, args)
+func Get(ID string, dest interface{}, query string) error {
+    err := dbGet(ID, dest, query)
     if err != nil {
         return err
     }
     return nil
 }
 
-func Create(data interface{}, query string, args ...interface{}) error {
-    err := db.Insert(ID, data, query, args)
+func Create(data interface{}, query string) error {
+    err := dbCreate(data, query)
     if err != nil {
         return err
     }
     return nil
 }
 
-func Update(ID string, data interface{}, query string, args ...interface{}) error {
-    err := db.Update(ID, data, query, args)
+func Update(ID string, data interface{}, query string) error {
+    err := dbUpdate(ID, data, query)
     if err != nil {
         return err
     }
     return nil
 }
 
-func Delete(ID string, query string, args ...interface{}) error {
-    err := db.Delete(ID, query, args)
+func Delete(ID string, query string) error {
+    err := dbDelete(ID, query)
     if err != nil {
         return err
     }

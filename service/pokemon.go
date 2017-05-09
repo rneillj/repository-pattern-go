@@ -10,16 +10,12 @@ import(
 
 func ListPokemon() ([]domain.Pokemon, err) {
     var data []domain.Pokemon
-
-    ret, err := repository.List(&data, db.ListPokemonQuery)
-
-    return ret, err
+    err := repository.List(&data, db.ListPokemonQuery)
+    return data, err
 }
 
-func GetPokemon() (domain.Pokemon, err) {
+func GetPokemon(ID string) (domain.Pokemon, err) {
     var data domain.Pokemon
-
-    ret, err := repository.Get(&data, db.PokemonQuery)
-
-    return ret, err
+    err := repository.Get(ID, &data, db.PokemonQuery)
+    return data, err
 }
